@@ -49,3 +49,17 @@ END FUNCTION
 4. Return the resulting matrix $C$.
 ## 1.1.2 Matrix Difference
 **Mathematical Procedure:**
+
+To subtract matrix $B$ from matrix $B$, both matrices must have the same dimensions. The difference $C$ of two matrices $A$ and $B$ is calculated element-wise:
+
+$$C[i][j] = A[i][j] - B[i][j]$$
+
+**Example:**
+
+Let $A$ and $B$ be two $2 \times 2$ matrices:
+
+$$A = \begin{bmatrix} 9 & 8 \\ 7 & 6 \end{bmatrix}, \quad B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$$
+
+The difference $C$ is:
+
+$$C = A - B = \begin{bmatrix} 9-1 & 8-2 \\ 7-3 & 6-4 \end{bmatrix} = \begin{bmatrix} 8 & 6 \\ 4 & 2 \end{bmatrix}$$
