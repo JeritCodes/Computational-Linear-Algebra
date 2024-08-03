@@ -15,8 +15,12 @@ Let $A$ and $B$ be two $2 \times 2$ matrices:
 
 $$ A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}, \quad B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} $$
 
+The sum $C$ is:
+
+
 **Pseudocode:**
 
+$$ C = A + B = \begin{bmatrix} 1+5 & 2+6 \\ 3+7 & 4+8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix} $$
 
 ```python
 FUNCTION matrix_difference(A, B):
@@ -38,3 +42,10 @@ FUNCTION matrix_difference(A, B):
     RETURN C
 END FUNCTION
 ```
+**Explanation:**
+1. Determine the number of rows and columns in matrix $A$.
+2. Create a new matrix $C$ with the same dimensions.
+3. Loop through each element of the matrices and add corresponding elements.
+4. Return the resulting matrix $C$.
+## 1.1.2 Matrix Difference
+**Mathematical Procedure:**
