@@ -173,3 +173,97 @@ END FUNCTION
 To find the determinant of a square matrix $A$, we can use the Laplace expansion, which involves breaking the matrix down into smaller submatrices. For a $2 \times 2$ matrix, the determinant is calculated as:
 $$\text{det}(A) = A[0][0] \cdot A[1][1] - A[0][1] \cdot A[1][0]$$
 For larger matrices, the determinant is calculated recursively.
+**Example:**
+
+Let $A$ be a $2 \times 2$ matrix:
+
+$A = \begin{bmatrix} 4 & 3 \\ 6 & 3 \end{bmatrix}$
+
+The determinant of $A$ is:
+
+$$\text{det}(A) = (4 \cdot 3) - (3 \cdot 6) = 12 - 18 = -6$$
+**Pseudocode:**
+```
+FUNCTION determinant(A):
+    # Step 1: Get the size of the matrix
+    n = number_of_rows(A)
+    
+    # Base case for a 2x2 matrix
+    IF n == 2:
+        RETURN A[0][0] * A[1][1] - A[0][1] * A[1][0]
+    
+    # Step 2: Initialize determinant to 0
+    det = 0
+    
+    # Step 3: Loop through each column of the first row
+    FOR each column j FROM 0 TO n-1:
+        # Get the submatrix excluding the first row and current column
+        submatrix = create_submatrix(A, 0, j)
+        # Recursive call to determinant
+        sub_det = determinant(submatrix)
+        # Alternating sign and adding to the determinant
+        det = det + ((-1) ^ j) * A[0][j] * sub_det
+    
+    RETURN det
+END FUNCTION
+
+FUNCTION create_sub_matrix(A, row, col):
+    sub_matrix = create_matrix(number_of_rows(A)-1, number_of_columns(A)-1)
+    sub_i = 0
+    FOR i FROM 0 TO number_of_rows(A)-1:
+        IF i == row:
+            CONTINUE
+        sub_j = 0
+        FOR j FROM 0 TO number_of_columns(A)-1:
+            IF j == col:
+                CONTINUE
+            sub_matrix[sub_i][sub_j] = A[i][j]
+            sub_j = sub_j + 1
+        sub_i = sub_i + 1
+    RETURN sub_matrix
+END FUNCTION
+```
+A human readable version of the same pseudocode is shown below:
+```
+FUNCTION determinant(A):
+    IF the size of A is 2x2:
+        RETURN the difference between the product of the diagonals
+    END IF
+    Initialize det to 0
+    FOR each column c in the first row:
+        Create a sub_matrix by removing the first row and column c
+        Add to det: the product of (-1)^c, the element A[0][c], and the determinant of the sub_matrix
+    RETURN det
+END FUNCTION
+
+FUNCTION create_sub_matrix(A, row, col):
+    Create an empty sub_matrix with dimensions one less than A
+    Set sub_i to 0
+    FOR each row i in A:
+        IF i is the row to be removed:
+            CONTINUE to the next row
+        Set sub_j to 0
+        FOR each column j in A:
+            IF j is the column to be removed:
+                CONTINUE to the next column
+            Copy the element A[i][j] to sub_matrix[sub_i][sub_j]
+            Increment sub_j
+        Increment sub_i
+    RETURN sub_matrix
+END FUNCTION
+```
+**Explanation:**
+
+1. If the matrix is $2 \times 2$, calculate the determinant directly.
+2. For larger matrices, use the Laplace expansion to recursively calculate the determinant.
+3. Create submatrices by removing the current row and column.
+4. Sum the determinants of the submatrices, adjusted for the sign and the current element.
+## 1.1.5 Rank of a Matrix
+**Mathematical Procedure:**
+
+The rank of a matrix $$A is the maximum number of linearly independent rows or columns in $A$. This can be found using Gaussian elimination to transform the matrix into its row echelon form (REF) and then counting the number of non-zero rows.
+
+**Example:**
+Let $A$ be a $3 \times 3$ matrix:
+
+$$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$$
